@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanbban</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" sizes="24x24" />
+    <link rel="apple-touch-icon" href="images/favicon.ico">
+    <link rel="preload" href="assets/styles.css" as="style">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js" defer></script>
+    <script src="https://apis.google.com/js/api.js" defer></script>
+    <script src="https://accounts.google.com/gsi/client" defer></script>
+</head>
+<body>
+    <div id="wall"></div>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo" id="homeBtn">
+                    <img src="images/favicon.ico" width="24" height="24" />
+                    <h2>Kanbban</h2>
+                </div>
+                <button id="new-project-btn" class="new-project">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="28"  height="28"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-square-rounded-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2l.324 .001l.318 .004l.616 .017l.299 .013l.579 .034l.553 .046c4.785 .464 6.732 2.411 7.196 7.196l.046 .553l.034 .579c.005 .098 .01 .198 .013 .299l.017 .616l.005 .642l-.005 .642l-.017 .616l-.013 .299l-.034 .579l-.046 .553c-.464 4.785 -2.411 6.732 -7.196 7.196l-.553 .046l-.579 .034c-.098 .005 -.198 .01 -.299 .013l-.616 .017l-.642 .005l-.642 -.005l-.616 -.017l-.299 -.013l-.579 -.034l-.553 -.046c-4.785 -.464 -6.732 -2.411 -7.196 -7.196l-.046 -.553l-.034 -.579a28.058 28.058 0 0 1 -.013 -.299l-.017 -.616c-.003 -.21 -.005 -.424 -.005 -.642l.001 -.324l.004 -.318l.017 -.616l.013 -.299l.034 -.579l.046 -.553c.464 -4.785 2.411 -6.732 7.196 -7.196l.553 -.046l.579 -.034c.098 -.005 .198 -.01 .299 -.013l.616 -.017c.21 -.003 .424 -.005 .642 -.005zm0 6a1 1 0 0 0 -1 1v2h-2l-.117 .007a1 1 0 0 0 .117 1.993h2v2l.007 .117a1 1 0 0 0 1.993 -.117v-2h2l.117 -.007a1 1 0 0 0 -.117 -1.993h-2v-2l-.007 -.117a1 1 0 0 0 -.993 -.883z" fill="currentColor" stroke-width="0" /></svg>
+                </button>
+            </div>
+
+            <div id="loading-message" style="display: flex; align-items: center; justify-content: center; align-self: center;">
+                <img src="/images/loading.svg" width="24" height="24" alt="Loading...">
+            </div>
+
+            <div class="projects-list" id="projects-list"></div>
+            
+            <div class="config">
+                <div id="user-profile">
+                    <img id="user-avatar" class="user-avatar" src="" width="24" height="24" />
+                    <span id="name"></span>
+                </div>
+                <button id="logout" class="light-mode">
+                    <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13 12v.01" /><path d="M3 21h18" /><path d="M5 21v-16a2 2 0 0 1 2 -2h7.5m2.5 10.5v7.5" /><path d="M14 7h7m-3 -3l3 3l-3 3" /></svg>
+                </button>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <div class="project-info">
+                    <h1 id="current-project-title"></h1>
+                </div>
+                <button id="new-board-btn">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="28"  height="28"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-square-rounded-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2l.324 .001l.318 .004l.616 .017l.299 .013l.579 .034l.553 .046c4.785 .464 6.732 2.411 7.196 7.196l.046 .553l.034 .579c.005 .098 .01 .198 .013 .299l.017 .616l.005 .642l-.005 .642l-.017 .616l-.013 .299l-.034 .579l-.046 .553c-.464 4.785 -2.411 6.732 -7.196 7.196l-.553 .046l-.579 .034c-.098 .005 -.198 .01 -.299 .013l-.616 .017l-.642 .005l-.642 -.005l-.616 -.017l-.299 -.013l-.579 -.034l-.553 -.046c-4.785 -.464 -6.732 -2.411 -7.196 -7.196l-.046 -.553l-.034 -.579a28.058 28.058 0 0 1 -.013 -.299l-.017 -.616c-.003 -.21 -.005 -.424 -.005 -.642l.001 -.324l.004 -.318l.017 -.616l.013 -.299l.034 -.579l.046 -.553c.464 -4.785 2.411 -6.732 7.196 -7.196l.553 -.046l.579 -.034c.098 -.005 .198 -.01 .299 -.013l.616 -.017c.21 -.003 .424 -.005 .642 -.005zm0 6a1 1 0 0 0 -1 1v2h-2l-.117 .007a1 1 0 0 0 .117 1.993h2v2l.007 .117a1 1 0 0 0 1.993 -.117v-2h2l.117 -.007a1 1 0 0 0 -.117 -1.993h-2v-2l-.007 -.117a1 1 0 0 0 -.993 -.883z" fill="currentColor" stroke-width="0" /></svg>
+                </button>
+            </header>
+        
+            <div class="welcome-message" id="welcome-message"> 
+                <textarea id="text-editor" placeholder="Type or paste your text here (it will NOT be saved)"></textarea>
+            </div>
+        
+            <div class="kanban-container" id="kanban-container">
+            </div>
+        </main>
+    </div>
+
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">New Project</div>
+            <div class="modal-body">
+                <input type="text" id="project-name-input" class="modal-input" placeholder="Project name">
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-project-btn" class="btn btn-cancel">Cancel</button>
+                <button id="create-project-btn" class="btn btn-save create"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-column-insert-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1z" /><path d="M5 12l4 0" /><path d="M7 10l0 4" /></svg>Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="project-edit-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">Edit Project</div>
+            <div class="modal-body">
+                <input type="text" id="project-edit-input" class="modal-input" placeholder="Project name">
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-project-edit-btn" class="btn btn-cancel">Cancel</button>
+                <button id="confirm-project-edit-btn" class="btn btn-save"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="project-delete-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">Delete Project</div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this project and all its boards and tasks?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-project-delete-btn" class="btn btn-cancel">Cancel</button>
+                <button id="confirm-project-delete-btn" class="btn btn-danger"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="currentColor"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.897 1a4 4 0 0 1 2.664 1.016l.165 .156l4.1 4.1a4 4 0 0 1 1.168 2.605l.006 .227v5.794a4 4 0 0 1 -1.016 2.664l-.156 .165l-4.1 4.1a4 4 0 0 1 -2.603 1.168l-.227 .006h-5.795a3.999 3.999 0 0 1 -2.664 -1.017l-.165 -.156l-4.1 -4.1a4 4 0 0 1 -1.168 -2.604l-.006 -.227v-5.794a4 4 0 0 1 1.016 -2.664l.156 -.165l4.1 -4.1a4 4 0 0 1 2.605 -1.168l.227 -.006h5.793zm-2.887 14l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -8a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z" /></svg>Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="board-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">New Board</div>
+            <div class="modal-body">
+                <input type="text" id="board-name-input" class="modal-input" placeholder="Board name">
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-board-btn" class="btn btn-cancel">Cancel</button>
+                <button id="create-board-btn" class="btn btn-save create"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-column-insert-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1z" /><path d="M5 12l4 0" /><path d="M7 10l0 4" /></svg>Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="board-edit-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">Edit Board</div>
+            <div class="modal-body">
+                <input type="text" id="board-edit-input" class="modal-input" placeholder="Board name">
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-edit-btn" class="btn btn-cancel">Cancel</button>
+                <button id="confirm-edit-btn" class="btn btn-save"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="board-delete-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">Delete Board</div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this board and all its tasks?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-delete-btn" class="btn btn-cancel">Cancel</button>
+                <button id="confirm-delete-btn" class="btn btn-danger"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="currentColor"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.897 1a4 4 0 0 1 2.664 1.016l.165 .156l4.1 4.1a4 4 0 0 1 1.168 2.605l.006 .227v5.794a4 4 0 0 1 -1.016 2.664l-.156 .165l-4.1 4.1a4 4 0 0 1 -2.603 1.168l-.227 .006h-5.795a3.999 3.999 0 0 1 -2.664 -1.017l-.165 -.156l-4.1 -4.1a4 4 0 0 1 -1.168 -2.604l-.006 -.227v-5.794a4 4 0 0 1 1.016 -2.664l.156 -.165l4.1 -4.1a4 4 0 0 1 2.605 -1.168l.227 -.006h5.793zm-2.887 14l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -8a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z" /></svg>Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>
