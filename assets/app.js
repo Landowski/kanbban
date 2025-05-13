@@ -1213,17 +1213,7 @@ function setupEventListeners() {
         }
     });
     
-    document.querySelectorAll('.modal-overlay').forEach(modal => {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                delete document.getElementById('project-edit-modal').dataset.projectId;
-                delete document.getElementById('project-delete-modal').dataset.projectId;
-                delete document.getElementById('board-edit-modal').dataset.boardId;
-                delete document.getElementById('board-delete-modal').dataset.boardId;
-            }
-        });
-    });
+    
     
     projectNameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
