@@ -970,17 +970,6 @@ boardEditInput.addEventListener('keypress', (e) => {
     }
 });
 
-document.querySelectorAll('.modal-overlay').forEach(modal => {
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-            currentBoardId = null;
-            delete projectEditModal.dataset.projectId;
-            delete projectDeleteModal.dataset.projectId;
-        }
-    });
-});
-
 function createCookieConsent() {
     if (localStorage.getItem('cookieConsentKanbban')) {
         return;
