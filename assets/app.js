@@ -1103,9 +1103,11 @@ function updateProgressBar(projectId) {
         progressFill.style.width = `${percentage}%`;
         progressText.textContent = `${percentage}%`;
     }
+
     if (percentage === 100) {
-        triggerConfetti();
+    triggerConfetti();
     }
+}
 
 function setupEventListeners() {
     newProjectBtn.addEventListener('click', openProjectModal);
@@ -1251,7 +1253,7 @@ function triggerConfetti() {
       particleCount: 100,
       spread: 70,
       origin: { x:0.2, y: 0.2 },
-      zIndex: 9999999999
+      zIndex: 99999999999999
     });
   }
 
