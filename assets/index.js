@@ -248,6 +248,9 @@ function updateProgressBar(projectId) {
         progressFill.style.width = `${percentage}%`;
         progressText.textContent = `${percentage}%`;
     }
+    if (percentage === 100) {
+    triggerConfetti();
+    }
 }
 
 function saveData() {
@@ -991,6 +994,15 @@ function acceptCookies() {
     if (cookieConsent) {
         cookieConsent.remove();
     }
+}
+
+function triggerConfetti() {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { x:0.2, y: 0.2 },
+      zIndex: 99999999999999
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
