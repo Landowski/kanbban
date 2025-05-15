@@ -1252,7 +1252,7 @@ function triggerConfetti() {
     confetti({
       particleCount: 100,
       spread: 70,
-      origin: { x:0.2, y: 0.2 },
+      origin: { x:0.3, y: 0.2 },
       zIndex: 99999999999999
     });
   }
