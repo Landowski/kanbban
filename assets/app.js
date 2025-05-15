@@ -1244,6 +1244,15 @@ function setupEventListeners() {
     });
 }
 
+function triggerConfetti() {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { x:0.2, y: 0.2 },
+      zIndex: 9999999999
+    });
+  }
+
 document.addEventListener('DOMContentLoaded', () => {
     const checkAPIs = setInterval(() => {
         if (window.gapi && window.google) {
