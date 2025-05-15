@@ -1103,7 +1103,9 @@ function updateProgressBar(projectId) {
         progressFill.style.width = `${percentage}%`;
         progressText.textContent = `${percentage}%`;
     }
-}
+    if (percentage === 100) {
+        triggerConfetti();
+    }
 
 function setupEventListeners() {
     newProjectBtn.addEventListener('click', openProjectModal);
